@@ -113,7 +113,7 @@ pub const DAYS: BlockNumber = HOURS * 24;
 pub const MILLICENTS: Balance = 1_000_000_000;
 pub const CENTS: Balance = 1_000 * MILLICENTS;
 pub const DOLLARS: Balance = 100 * CENTS;
-pub const CANS: Balance = CENTS;
+pub const BAS: Balance = CENTS;
 
 /// The version information used to identify this runtime when compiled natively.
 #[cfg(feature = "std")]
@@ -248,8 +248,8 @@ impl pallet_balances::Trait for Runtime {
 }
 
 parameter_types! {
-	/// 1 CAN = 1 Megabyte
-	pub const TransactionByteFee: Balance = CANS / (1024 * 1024);
+	/// 1 BAS = 1 Megabyte
+	pub const TransactionByteFee: Balance = BAS / (1024 * 1024);
 	pub const TargetBlockFullness: Perquintill = Perquintill::from_percent(25);
 	pub AdjustmentVariable: Multiplier = Multiplier::saturating_from_rational(3, 100_000);
 	pub MinimumMultiplier: Multiplier = Multiplier::saturating_from_rational(1, 1_000_000_000u128);

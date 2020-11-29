@@ -9,7 +9,7 @@
   "telemetryEndpoints": null,
   "protocolId": "prc",
   "properties": {
-    "tokenSymbol": "CAN",
+    "tokenSymbol": "BAS",
     "tokenDecimals": 12,
     "ss58Format": 42
   },
