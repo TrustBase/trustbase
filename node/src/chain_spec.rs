@@ -33,7 +33,7 @@ pub type ChainSpec = sc_service::GenericChainSpec<GenesisConfig>;
 
 /// Trust network config
 pub fn trust_config() -> Result<ChainSpec, String> {
-	ChainSpec::from_json_bytes(&include_bytes!("../../res/testnet-1.json")[..])
+	ChainSpec::from_json_bytes(&include_bytes!("../../res/trust_cc1.json")[..])
 }
 
 /// Helper function to generate a crypto pair from seed
