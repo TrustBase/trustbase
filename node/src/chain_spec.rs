@@ -76,7 +76,7 @@ pub fn testnet_authorities() -> Vec<(AuraId, GrandpaId)> {
 }
 
 pub fn testnet_root() -> AccountId {
-	hex!("1c83e0e631105f17c8985f0fa6f8d544a4f58d446574f2bc9873f3ddca0b3c51").into()
+	hex!("345ceb562c0dec7a2fa2231aa21bdab6bd3712a587a203550a9bbdb495fa5969").into()
 }
 
 pub fn development_config() -> Result<ChainSpec, String> {
