@@ -65,18 +65,18 @@ pub fn testnet_authorities() -> Vec<(AuraId, GrandpaId)> {
 	use sp_core::crypto::UncheckedInto;
 	vec![
 		(
-			hex!("74608217b1709e1d3a4fe65b132db5c3f321e625026080833189661aa5e20712").unchecked_into(),
-			hex!("a5abc21ac95ae63dd6e61e5bec263ab46d1efe16d3dcc085d0de297318cb662d").unchecked_into(),
+			hex!("1c83e0e631105f17c8985f0fa6f8d544a4f58d446574f2bc9873f3ddca0b3c51").unchecked_into(),
+			hex!("fb67b3659cd68bde1aaa13b3c993474985a7892c040cf6d2f73208760a9a51db").unchecked_into(),
 		),
 		(
-			hex!("44f3876fe4f653533c65e79461a476b8d6a107fb71b6ec0f3485bb53b4e7b842").unchecked_into(),
-			hex!("281be34a71b661b257153e1145522fd0820cfff6a3601b40e7f85d3bc155240d").unchecked_into(),
+			hex!("fcba156e9d068b60570c37604f2f49bc01d985a03a6b64d64ae06db3071f4474").unchecked_into(),
+			hex!("3b9682cdbda6233a9fc38ed3ca3783300a5e225003f728b29283ffc0bdf4bc29").unchecked_into(),
 		),
 	]
 }
 
 pub fn testnet_root() -> AccountId {
-	hex!("baa78c7154c7f82d6d377177e20bcab65d327eca0086513f9964f5a0f6bdad56").into()
+	hex!("1c83e0e631105f17c8985f0fa6f8d544a4f58d446574f2bc9873f3ddca0b3c51").into()
 }
 
 pub fn development_config() -> Result<ChainSpec, String> {
@@ -171,9 +171,7 @@ pub fn testnet_config() -> Result<ChainSpec, String> {
 			true,
 		),
 		vec![
-			"/ip4/35.233.19.96/tcp/30333/p2p/QmNvYhAZSBtahCqCXznYiq8e24Yes1GraPFYCc3DyA5f3z".parse()
-				.expect("MultiaddrWithPeerId"),
-			"/ip4/35.205.110.21/tcp/30333/p2p/QmPKFc9B2oeQFc5oxbNsRENwSYibzzafKmcHs9wBZCJH4U".parse()
+			"/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWNNgBEeRgNhMeZ6iv1pMawU26fs77SMLZZay6DtBBncEm".parse()
 				.expect("MultiaddrWithPeerId"),
 		],
 		None,
