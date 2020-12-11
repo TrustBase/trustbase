@@ -12,7 +12,7 @@ Install all the required dependencies with a single command
 curl https://getsubstrate.io -sSf | bash -s -- --fast
 ```
 
-## Build
+## Build from source
 
 Once the development environment is set up, build the trustbase client.
 
@@ -38,4 +38,14 @@ or
 
 ```
 cargo run --release -- --chain=./res/testnet-1.json
+```
+
+## TrustBase network
+
+This repo supports trustbase runtimes for trustcc1.
+
+Connect to the trustcc1 network by running:
+
+```bash
+./target/release/polkadot
 ```
