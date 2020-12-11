@@ -6,7 +6,7 @@
     "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWNNgBEeRgNhMeZ6iv1pMawU26fs77SMLZZay6DtBBncEm"
   ],
   "telemetryEndpoints": null,
-  "protocolId": null,
+  "protocolId": "trustcc1",
   "properties": null,
   "consensusEngine": null,
   "lightSyncState": null,
