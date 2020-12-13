@@ -72,10 +72,19 @@ pub fn testnet_authorities() -> Vec<(AuraId, GrandpaId)> {
 			hex!("fcba156e9d068b60570c37604f2f49bc01d985a03a6b64d64ae06db3071f4474").unchecked_into(),
 			hex!("3b9682cdbda6233a9fc38ed3ca3783300a5e225003f728b29283ffc0bdf4bc29").unchecked_into(),
 		),
+		(
+			hex!("7ae6fceddf6f670ec1f42113d4f0d6210010ca26cd7571db64c7857098e1cf7c").unchecked_into(),
+			hex!("f6640d0021de921083054c0a9536345de5501ebfb23327732b74d37539c20f7f").unchecked_into(),
+		),
+		(
+			hex!("e60d952e690e72aea36117eeca6f346bdaef59b627cc5c26491cb72194bd5a1a").unchecked_into(),
+			hex!("6b54329f016ac966ac99c83cce6e48a4d088a6c3e9951f243c3e65596c8dfab8").unchecked_into(),
+		),
 	]
 }
 
 pub fn testnet_root() -> AccountId {
+	// 5DFMx3uqVu1gaQ4JFb3c9ArS28EggtxUugxLKpYkHFbN8sEc
 	hex!("345ceb562c0dec7a2fa2231aa21bdab6bd3712a587a203550a9bbdb495fa5969").into()
 }
 
@@ -167,7 +176,16 @@ pub fn testnet_config() -> Result<ChainSpec, String> {
 			wasm_binary,
 			testnet_authorities(),
 			testnet_root(),
-			vec![testnet_root()],
+			vec![
+				// 5HYbaX5ZAYjNXpLhmH8LMok4Nf8And1kd1maKvj1fQgbrnBK
+				hex!("f272e74ac1a79a1f375788bd8b7449023eb8709b6fa458a7f4006327b62a951a").into(),
+				// 5DFMx3uqVu1gaQ4JFb3c9ArS28EggtxUugxLKpYkHFbN8sEc
+				hex!("345ceb562c0dec7a2fa2231aa21bdab6bd3712a587a203550a9bbdb495fa5969").into(),
+				// 5CcRiAqEXHLykeibjLLye4asBirJydANSLAShHHjyNj2ig4Z
+				hex!("18317fb76f0d670623c715e67e5fac24863dd49e73789d162fcab890420f391b").into(),
+				// 5CLVZtuj3dieNHDSVmD9rpPE1rfotgpknw1C4E6p6DXve1Lm
+				hex!("0c0a8eaff79cf40af6181da4710cf85daadbb6458493b66a4a32d71261b55a4e").into(),
+			],
 			true,
 		),
 		vec![
