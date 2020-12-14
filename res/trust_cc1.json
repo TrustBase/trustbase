@@ -3,7 +3,7 @@
   "id": "trust_testnet",
   "chainType": "Live",
   "bootNodes": [
-    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWNNgBEeRgNhMeZ6iv1pMawU26fs77SMLZZay6DtBBncEm"
+    "/ip4/34.210.80.113/tcp/30333/p2p/12D3KooWNNgBEeRgNhMeZ6iv1pMawU26fs77SMLZZay6DtBBncEm"
   ],
   "telemetryEndpoints": null,
   "protocolId": "trustcc1",
