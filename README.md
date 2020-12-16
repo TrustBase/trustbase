@@ -28,7 +28,13 @@ To run local dev node, do
 cargo run --release -- --dev
 ```
 
-To run test net 1, do
+To run local network, do
+
+```
+cargo run --release -- --chain local
+```
+
+To run testnet1, do
 
 ```
 cargo run --release
