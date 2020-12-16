@@ -189,7 +189,7 @@ pub fn testnet_config() -> Result<ChainSpec, String> {
 			true,
 		),
 		vec![
-			"/ip4/34.210.80.113/tcp/30333/p2p/12D3KooWNNgBEeRgNhMeZ6iv1pMawU26fs77SMLZZay6DtBBncEm".parse()
+			"/ip4/54.70.204.0/tcp/30333/p2p/12D3KooWNNgBEeRgNhMeZ6iv1pMawU26fs77SMLZZay6DtBBncEm".parse()
 				.expect("MultiaddrWithPeerId"),
 		],
 		None,
