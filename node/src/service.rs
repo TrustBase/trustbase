@@ -20,7 +20,13 @@ use std::sync::Arc;
 use std::time::Duration;
 use sc_client_api::{ExecutorProvider, RemoteBackend};
 use trust_runtime::{self, opaque::Block, RuntimeApi};
-use sc_service::{error::Error as ServiceError, Configuration, TaskManager};
+
+use sc_service::{
+	Configuration,
+	BuildNetworkParams, error::Error as ServiceError, NoopRpcExtensionBuilder, PartialComponents,
+	Role as ServiceRole, SpawnTasksParams, TaskManager, TelemetryConnectionSinks,
+};
+
 use sp_inherents::InherentDataProviders;
 use sc_executor::native_executor_instance;
 pub use sc_executor::NativeExecutor;
@@ -37,6 +43,135 @@ native_executor_instance!(
 type FullClient = sc_service::TFullClient<Block, RuntimeApi, Executor>;
 type FullBackend = sc_service::TFullBackend<Block>;
 type FullSelectChain = sc_consensus::LongestChain<FullBackend, Block>;
+
+/*
+#[cfg(feature = "full-node")]
+fn new_partial2<RuntimeApi, Executor>(
+	config: &mut Configuration,
+) -> Result<
+	PartialComponents<
+		FullClient<RuntimeApi, Executor>,
+		FullBackend,
+		FullSelectChain,
+		DefaultImportQueue<Block, FullClient<RuntimeApi, Executor>>,
+		FullPool<Block, FullClient<RuntimeApi, Executor>>,
+		(
+			impl Fn(DenyUnsafe, SubscriptionTaskExecutor) -> RpcExtension,
+			(
+				BabeBlockImport<
+					Block,
+					FullClient<RuntimeApi, Executor>,
+					FullGrandpaBlockImport<RuntimeApi, Executor>,
+				>,
+				LinkHalf<Block, FullClient<RuntimeApi, Executor>, FullSelectChain>,
+				BabeLink<Block>,
+			),
+			(
+				GrandpaSharedVoterState,
+				Arc<GrandpaFinalityProofProvider<FullBackend, Block>>,
+			),
+		),
+	>,
+	ServiceError,
+>
+where
+	Executor: 'static + NativeExecutionDispatch,
+	RuntimeApi:
+		'static + Send + Sync + ConstructRuntimeApi<Block, FullClient<RuntimeApi, Executor>>,
+	RuntimeApi::RuntimeApi:
+		RuntimeApiCollection<StateBackend = StateBackendFor<FullBackend, Block>>,
+{
+	set_prometheus_registry(config)?;
+
+	let inherent_data_providers = InherentDataProviders::new();
+	let (client, backend, keystore, task_manager) =
+		sc_service::new_full_parts::<Block, RuntimeApi, Executor>(&config)?;
+	let client = Arc::new(client);
+	let select_chain = LongestChain::new(backend.clone());
+	let transaction_pool = BasicPool::new_full(
+		config.transaction_pool.clone(),
+		config.prometheus_registry(),
+		task_manager.spawn_handle(),
+		client.clone(),
+	);
+	let grandpa_hard_forks = vec![];
+	let (grandpa_block_import, grandpa_link) =
+		sc_finality_grandpa::block_import_with_authority_set_hard_forks(
+			client.clone(),
+			&(client.clone() as Arc<_>),
+			select_chain.clone(),
+			grandpa_hard_forks,
+		)?;
+	let justification_import = grandpa_block_import.clone();
+	let (babe_import, babe_link) = sc_consensus_babe::block_import(
+		BabeConfig::get_or_compute(&*client)?,
+		grandpa_block_import,
+		client.clone(),
+	)?;
+	let import_queue = sc_consensus_babe::import_queue(
+		babe_link.clone(),
+		babe_import.clone(),
+		Some(Box::new(justification_import)),
+		None,
+		client.clone(),
+		select_chain.clone(),
+		inherent_data_providers.clone(),
+		&task_manager.spawn_handle(),
+		config.prometheus_registry(),
+		CanAuthorWithNativeVersion::new(client.executor().clone()),
+	)?;
+	let justification_stream = grandpa_link.justification_stream();
+	let shared_authority_set = grandpa_link.shared_authority_set().clone();
+	let shared_voter_state = GrandpaSharedVoterState::empty();
+	let finality_proof_provider =
+		GrandpaFinalityProofProvider::new_for_service(backend.clone(), client.clone());
+	let import_setup = (babe_import.clone(), grandpa_link, babe_link.clone());
+	let rpc_setup = (shared_voter_state.clone(), finality_proof_provider.clone());
+	let babe_config = babe_link.config().clone();
+	let shared_epoch_changes = babe_link.epoch_changes().clone();
+	let rpc_extensions_builder = {
+		let client = client.clone();
+		let keystore = keystore.clone();
+		let transaction_pool = transaction_pool.clone();
+		let select_chain = select_chain.clone();
+
+		move |deny_unsafe, subscription_executor| -> RpcExtension {
+			let deps = FullDeps {
+				client: client.clone(),
+				pool: transaction_pool.clone(),
+				select_chain: select_chain.clone(),
+				deny_unsafe,
+				babe: BabeDeps {
+					babe_config: babe_config.clone(),
+					shared_epoch_changes: shared_epoch_changes.clone(),
+					keystore: keystore.clone(),
+				},
+				grandpa: GrandpaDeps {
+					shared_voter_state: shared_voter_state.clone(),
+					shared_authority_set: shared_authority_set.clone(),
+					justification_stream: justification_stream.clone(),
+					subscription_executor,
+					finality_provider: finality_proof_provider.clone(),
+				},
+			};
+
+			crate::rpc::create_full(deps)
+		}
+	};
+
+	Ok(PartialComponents {
+		client,
+		backend,
+		task_manager,
+		keystore,
+		select_chain,
+		import_queue,
+		transaction_pool,
+		inherent_data_providers,
+		other: (rpc_extensions_builder, import_setup, rpc_setup),
+	})
+}
+*/
 
 pub fn new_partial(config: &Configuration) -> Result<sc_service::PartialComponents<
 	FullClient, FullBackend, FullSelectChain,
