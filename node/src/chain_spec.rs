@@ -32,7 +32,7 @@ use hex_literal::hex;
 pub type ChainSpec = sc_service::GenericChainSpec<GenesisConfig>;
 
 /// Trust network config
-pub fn trust_config() -> Result<ChainSpec, String> {
+pub fn trust_cc1_config() -> Result<ChainSpec, String> {
 	ChainSpec::from_json_bytes(&include_bytes!("../../res/trust_cc1.json")[..])
 }
 

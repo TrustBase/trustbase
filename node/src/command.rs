@@ -49,7 +49,7 @@ impl SubstrateCli for Cli {
 			"dev" => Box::new(chain_spec::development_config()?),
 			"local" => Box::new(chain_spec::local_testnet_config()?),
 			"testnet" => Box::new(chain_spec::testnet_config()?),
-			"" => Box::new(chain_spec::trust_config()?), // default trust network
+			"" => Box::new(chain_spec::trust_cc1_config()?), // default trust network
 			path => Box::new(chain_spec::ChainSpec::from_json_file(
 				std::path::PathBuf::from(path),
 			)?),
