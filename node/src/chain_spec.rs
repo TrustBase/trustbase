@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the TrustBase library. If not, see <http://www.gnu.org/licenses/>.
 use sp_core::{Pair, Public, sr25519};
-use trust_runtime::{
+use trust_cc1_runtime::{
 	AccountId, AuraConfig, BalancesConfig, GenesisConfig, GrandpaConfig,
 	SudoConfig, SystemConfig, WASM_BINARY, Signature,
 	ContractsConfig,

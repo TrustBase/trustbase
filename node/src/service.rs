@@ -19,7 +19,7 @@
 use std::sync::Arc;
 use std::time::Duration;
 use sc_client_api::{ExecutorProvider, RemoteBackend};
-use trust_runtime::{self, opaque::Block, RuntimeApi};
+use trust_cc1_runtime::{self, opaque::Block, RuntimeApi};
 
 use sc_service::{
 	Configuration,
@@ -36,8 +36,8 @@ use sc_finality_grandpa::{FinalityProofProvider as GrandpaFinalityProofProvider,
 // Our native executor instance.
 native_executor_instance!(
 	pub Executor,
-	trust_runtime::api::dispatch,
-	trust_runtime::native_version,
+	trust_cc1_runtime::api::dispatch,
+	trust_cc1_runtime::native_version,
 );
 
 type FullClient = sc_service::TFullClient<Block, RuntimeApi, Executor>;

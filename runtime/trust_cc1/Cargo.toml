@@ -1,5 +1,5 @@
 [package]
-name = "trust-runtime"
+name = "trust-cc1-runtime"
 version = "0.1.0"
 authors = ["trust dev"]
 edition = "2018"
