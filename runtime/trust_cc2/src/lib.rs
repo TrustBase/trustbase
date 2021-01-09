@@ -482,6 +482,17 @@ impl pallet_authorship::Trait for Runtime {
 }
 
 parameter_types! {
+	pub OffencesWeightSoftLimit: Weight = Perbill::from_percent(60) * MaximumBlockWeight::get();
+}
+
+impl pallet_offences::Trait for Runtime {
+	type Event = Event;
+	type IdentificationTuple = session::historical::IdentificationTuple<Self>;
+	type OnOffenceHandler = Staking;
+	type WeightSoftLimit = OffencesWeightSoftLimit;
+}
+
+parameter_types! {
 	pub const ExistentialDeposit: u128 = 500;
 	pub const MaxLocks: u32 = 50;
 }
@@ -508,6 +519,7 @@ parameter_types! {
 
 impl pallet_transaction_payment::Trait for Runtime {
 	type OnChargeTransaction = CurrencyAdapter<Balances, ()>;
+	type OnTransactionPayment = DealWithFees;
 	type TransactionByteFee = TransactionByteFee;
 	type WeightToFee = IdentityFee<Balance>;
 	type FeeMultiplierUpdate = ();
@@ -544,6 +556,8 @@ impl pallet_sudo::Trait for Runtime {
 	type Event = Event;
 	type Call = Call;
 }
+
+
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
