@@ -160,11 +160,9 @@ pub struct CurrencyToVoteHandler;
 impl CurrencyToVoteHandler {
 	fn factor() -> Balance { (Balances::total_issuance() / u64::max_value() as Balance).max(1) }
 }
-
 impl Convert<Balance, u64> for CurrencyToVoteHandler {
 	fn convert(x: Balance) -> u64 { (x / Self::factor()) as u64 }
 }
-
 impl Convert<u128, Balance> for CurrencyToVoteHandler {
 	fn convert(x: u128) -> Balance { x * Self::factor() }
 }
@@ -194,9 +192,17 @@ impl OnUnbalanced<NegativeImbalance> for DealWithFees {
 	}
 }
 
+/// Avoid processing transactions from slots and parachain registrar.
+pub struct BaseFilter;
+impl Filter<Call> for BaseFilter {
+	fn filter(_: &Call) -> bool {
+		true
+	}
+}
+
 impl frame_system::Trait for Runtime {
 	/// The basic call filter to use in dispatchable.
-	type BaseCallFilter = ();
+	type BaseCallFilter = BaseFilter;
 	/// The identifier used to distinguish between accounts.
 	type AccountId = AccountId;
 	/// The aggregated dispatch type that is available for extrinsics.
