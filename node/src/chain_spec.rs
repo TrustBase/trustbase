@@ -31,8 +31,16 @@ use hex_literal::hex;
 /// Specialized `ChainSpec`. This is a specialization of the general Substrate ChainSpec type.
 pub type ChainSpec = sc_service::GenericChainSpec<GenesisConfig>;
 
+/// The `ChainSpec` parametrised for the CC2 runtime.
+pub type TrustCC2Spec = sc_service::GenericChainSpec<GenesisConfig>;
+
 /// Trust network config
 pub fn trust_cc1_config() -> Result<ChainSpec, String> {
+	ChainSpec::from_json_bytes(&include_bytes!("../../res/trust_cc1.json")[..])
+}
+
+/// Trust network cc2 config
+pub fn trust_cc2_config() -> Result<ChainSpec, String> {
 	ChainSpec::from_json_bytes(&include_bytes!("../../res/trust_cc1.json")[..])
 }
 
