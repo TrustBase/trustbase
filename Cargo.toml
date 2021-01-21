@@ -1,7 +1,26 @@
+
+[[bin]]
+name = "TrustBase"
+path = "src/main.rs"
+
+[package]
+name = "trust-base"
+version = "0.1.0"
+authors = ["trust dev"]
+edition = "2018"
+
+[dependencies]
+node-cli = { package = "node-cli", path = "cli" }
+
+
 [workspace]
 members = [
-    'node',
-    'runtime/trust_cc1',
+    'cli',
+    "primitives",
+    'executor',
+    'inspect',
+    'runtime',
 ]
+
 [profile.release]
 panic = 'unwind'
