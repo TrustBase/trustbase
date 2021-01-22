@@ -22,7 +22,7 @@ is-it-maintained-issue-resolution = { repository = "paritytech/substrate" }
 is-it-maintained-open-issues = { repository = "paritytech/substrate" }
 
 #[[bin]]
-#name = "substrate"
+#name = "trustbase"
 #path = "bin/main.rs"
 #required-features = ["cli"]
 

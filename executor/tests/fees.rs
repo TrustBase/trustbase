@@ -1,19 +1,15 @@
-// This file is part of Substrate.
-
-// Copyright (C) 2018-2021 Parity Technologies (UK) Ltd.
-// SPDX-License-Identifier: Apache-2.0
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// Copyright 2019 TrustBase Network
+// This file is part of TrustBase library.
 //
-// 	http://www.apache.org/licenses/LICENSE-2.0
+// The TrustBase library is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// The TrustBase library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
 
 use codec::{Encode, Joiner};
 use frame_support::{
@@ -132,11 +128,11 @@ fn new_account_info(free_dollars: u128) -> Vec<u8> {
 
 #[test]
 fn transaction_fee_is_correct() {
-	// This uses the exact values of substrate-node.
+	// This uses the exact values of trustbase-node.
 	//
 	// weight of transfer call as of now: 1_000_000
 	// if weight of the cheapest weight would be 10^7, this would be 10^9, which is:
-	//   - 1 MILLICENTS in substrate node.
+	//   - 1 MILLICENTS in trustbase node.
 	//   - 1 milli-dot based on current polkadot runtime.
 	// (this baed on assigning 0.1 CENT to the cheapest tx with `weight = 100`)
 	let mut t = new_test_ext(compact_code_unwrap(), false);

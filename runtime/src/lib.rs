@@ -1,22 +1,20 @@
-// This file is part of Substrate.
-
-// Copyright (C) 2018-2021 Parity Technologies (UK) Ltd.
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
-
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// Copyright 2019 TrustBase Network
+// This file is part of TrustBase library.
+//
+// The TrustBase library is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-
-// This program is distributed in the hope that it will be useful,
+//
+// The TrustBase library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the TrustBase library. If not, see <http://www.gnu.org/licenses/>.
 
-// You should have received a copy of the GNU General Public License
-// along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-//! The Substrate runtime. This can be compiled with `#[no_std]`, ready for Wasm.
+//! The TrustBase runtime. This can be compiled with `#[no_std]`, ready for Wasm.
 
 #![cfg_attr(not(feature = "std"), no_std)]
 // `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.
@@ -105,8 +103,8 @@ pub fn wasm_binary_unwrap() -> &'static [u8] {
 
 /// Runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("node"),
-	impl_name: create_runtime_str!("substrate-node"),
+	spec_name: create_runtime_str!("trustbase-cc2"),
+	impl_name: create_runtime_str!("trustbase-cc2"),
 	authoring_version: 10,
 	// Per convention: if the runtime behavior changes, increment spec_version
 	// and set impl_version to 0. If only runtime
