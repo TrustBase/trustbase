@@ -1,16 +1,16 @@
+[package]
+name = "substrate"
+version = "0.1.0"
+authors = ["t"]
+edition = "2018"
 
 [[bin]]
-name = "TrustBase"
+name = "substrate"
 path = "src/main.rs"
-
-[package]
-name = "trust-base"
-version = "0.1.0"
-authors = ["trust dev"]
-edition = "2018"
 
 [dependencies]
 node-cli = { package = "node-cli", path = "cli" }
+
 
 
 [workspace]
