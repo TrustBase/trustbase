@@ -42,7 +42,7 @@ pub use node_runtime::GenesisConfig;
 
 type AccountPublic = <Signature as Verify>::Signer;
 
-const STAGING_TELEMETRY_URL: &str = "wss://telemetry.polkadot.io/submit/";
+const TRUSTCC2_TELEMETRY_URL: &str = "wss://telemetry.polkadot.io/submit/";
 
 /// Node `ChainSpec` extensions.
 ///
@@ -63,7 +63,7 @@ pub type ChainSpec = sc_service::GenericChainSpec<
 	Extensions,
 >;
 /// Flaming Fir testnet generator
-pub fn flaming_fir_config() -> Result<ChainSpec, String> {
+pub fn trust_cc2_config() -> Result<ChainSpec, String> {
 	ChainSpec::from_json_bytes(&include_bytes!("../res/flaming-fir.json")[..])
 }
 
@@ -76,7 +76,7 @@ fn session_keys(
 	SessionKeys { grandpa, babe, im_online, authority_discovery }
 }
 
-fn staging_testnet_config_genesis() -> GenesisConfig {
+fn testnet_config_genesis() -> GenesisConfig {
 	// stash, controller, session-key
 	// generated with secret:
 	// for i in 1 2 3 4 ; do for j in stash controller; do subkey inspect "$secret"/fir/$j/$i; done; done
@@ -154,16 +154,16 @@ fn staging_testnet_config_genesis() -> GenesisConfig {
 }
 
 /// Staging testnet config.
-pub fn staging_testnet_config() -> ChainSpec {
+pub fn testnet_config() -> ChainSpec {
 	let boot_nodes = vec![];
 	ChainSpec::from_genesis(
-		"Staging Testnet",
-		"staging_testnet",
+		"trust_cc2 Testnet",
+		"trust_cc2_testnet",
 		ChainType::Live,
-		staging_testnet_config_genesis,
+		testnet_config_genesis,
 		boot_nodes,
-		Some(TelemetryEndpoints::new(vec![(STAGING_TELEMETRY_URL.to_string(), 0)])
-			.expect("Staging telemetry url is valid; qed")),
+		Some(TelemetryEndpoints::new(vec![(TRUSTCC2_TELEMETRY_URL.to_string(), 0)])
+			.expect("trust_cc2 telemetry url is valid; qed")),
 		None,
 		None,
 		Default::default(),
@@ -458,6 +458,6 @@ pub(crate) mod tests {
 
 	#[test]
 	fn test_staging_test_net_chain_spec() {
-		staging_testnet_config().build_storage().unwrap();
+		testnet_config().build_storage().unwrap();
 	}
 }
