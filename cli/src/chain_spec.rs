@@ -64,7 +64,7 @@ pub type ChainSpec = sc_service::GenericChainSpec<
 >;
 /// Flaming Fir testnet generator
 pub fn trust_cc2_config() -> Result<ChainSpec, String> {
-	ChainSpec::from_json_bytes(&include_bytes!("../res/flaming-fir.json")[..])
+	ChainSpec::from_json_bytes(&include_bytes!("../res/trust_cc2.json")[..])
 }
 
 fn session_keys(
