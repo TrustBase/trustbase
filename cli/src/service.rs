@@ -32,7 +32,7 @@ use sp_runtime::traits::Block as BlockT;
 use futures::prelude::*;
 use sc_client_api::{ExecutorProvider, RemoteBackend};
 use node_executor::Executor;
-use sc_telemetry::TelemetryConnectionNotifier;
+use sc_telemetry::{TelemetryConnectionNotifier, TelemetrySpan};
 
 type FullClient = sc_service::TFullClient<Block, RuntimeApi, Executor>;
 type FullBackend = sc_service::TFullBackend<Block>;
@@ -224,6 +224,9 @@ pub fn new_full_base(
 	let enable_grandpa = !config.disable_grandpa;
 	let prometheus_registry = config.prometheus_registry().cloned();
 
+	let telemetry_span = TelemetrySpan::new();
+	let _telemetry_span_entered = telemetry_span.enter();
+
 	let (_rpc_handlers, telemetry_connection_notifier) = sc_service::spawn_tasks(
 		sc_service::SpawnTasksParams {
 			config,
@@ -238,6 +241,7 @@ pub fn new_full_base(
 			remote_blockchain: None,
 			network_status_sinks: network_status_sinks.clone(),
 			system_rpc_tx,
+			telemetry_span: Some(telemetry_span.clone()),
 		},
 	)?;
 
@@ -431,6 +435,9 @@ pub fn new_light_base(mut config: Configuration) -> Result<(
 
 	let rpc_extensions = node_rpc::create_light(light_deps);
 
+	let telemetry_span = TelemetrySpan::new();
+	let _telemetry_span_entered = telemetry_span.enter();
+
 	let (rpc_handlers, telemetry_connection_notifier) =
 		sc_service::spawn_tasks(sc_service::SpawnTasksParams {
 			on_demand: Some(on_demand),
@@ -442,6 +449,7 @@ pub fn new_light_base(mut config: Configuration) -> Result<(
 			config, backend, network_status_sinks, system_rpc_tx,
 			network: network.clone(),
 			task_manager: &mut task_manager,
+			telemetry_span: Some(telemetry_span.clone()),
 		})?;
 
 	Ok((
