@@ -17,7 +17,7 @@ curl https://getsubstrate.io -sSf | bash -s -- --fast
 Once the development environment is set up, build the trustbase client.
 
 ```bash
-cargo build --release
+cargo build --release --locked
 ```
 
 ## Usage
@@ -34,24 +34,18 @@ To run local network, do
 cargo run --release -- --chain local
 ```
 
-To run testnet1, do
+To run trustbase testnet, do
 
 ```
-cargo run --release
-```
-
-or
-
-```
-cargo run --release -- --chain=./res/trust_cc1.json
+./target/release/trustbase --chain testnet
 ```
 
 ## TrustBase network
 
-This repo supports trustbase runtimes for trustcc1.
+This repo supports trustbase runtimes for trustcc2.
 
 Connect to the trustcc1 network by running:
 
 ```bash
-./target/release/trustbase
+./target/release/trustbase --chain testnet
 ```
