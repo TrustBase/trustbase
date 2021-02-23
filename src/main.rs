@@ -11,9 +11,6 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-#![warn(missing_docs)]
-
-
 fn main() -> node_cli::Result<()> {
 	node_cli::run()
 }
