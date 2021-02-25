@@ -105,15 +105,15 @@ pub fn wasm_binary_unwrap() -> &'static [u8] {
 pub const VERSION: RuntimeVersion = RuntimeVersion {
 	spec_name: create_runtime_str!("trustbase-cc2"),
 	impl_name: create_runtime_str!("trustbase-cc2"),
-	authoring_version: 10,
+	authoring_version: 1,
 	// Per convention: if the runtime behavior changes, increment spec_version
 	// and set impl_version to 0. If only runtime
 	// implementation changes and behavior does not, then leave spec_version as
 	// is and increment impl_version.
-	spec_version: 264,
+	spec_version: 1,
 	impl_version: 1,
 	apis: RUNTIME_API_VERSIONS,
-	transaction_version: 2,
+	transaction_version: 1,
 };
 
 /// Native version.

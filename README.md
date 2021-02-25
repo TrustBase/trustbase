@@ -47,5 +47,5 @@ This repo supports trustbase runtimes for trustcc2.
 Connect to the trustcc1 network by running:
 
 ```bash
-./target/release/trustbase --chain testnet
+./target/release/trustbase
 ```
