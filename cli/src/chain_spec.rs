@@ -22,9 +22,13 @@ use sp_core::{Pair, Public, crypto::UncheckedInto, sr25519};
 use serde::{Serialize, Deserialize};
 use node_runtime::{
 	AuthorityDiscoveryConfig, BabeConfig, BalancesConfig, ContractsConfig, CouncilConfig,
-	DemocracyConfig,GrandpaConfig, ImOnlineConfig, SessionConfig, SessionKeys, StakerStatus,
-	StakingConfig, ElectionsConfig, IndicesConfig, SocietyConfig, SudoConfig, SystemConfig,
-	TechnicalCommitteeConfig, wasm_binary_unwrap,
+	GrandpaConfig, ImOnlineConfig, SessionConfig, SessionKeys, StakerStatus,
+	StakingConfig, ElectionsConfig, IndicesConfig, SudoConfig, SystemConfig,
+	wasm_binary_unwrap,
+	// DemocracyConfig,
+	// SocietyConfig,
+	// TechnicalCommitteeConfig,
+	// TechnicalCommitteeConfig,
 };
 use node_runtime::Block;
 use node_runtime::constants::currency::*;
@@ -277,7 +281,7 @@ pub fn testnet_genesis(
 			slash_reward_fraction: Perbill::from_percent(10),
 			.. Default::default()
 		}),
-		pallet_democracy: Some(DemocracyConfig::default()),
+		// pallet_democracy: Some(DemocracyConfig::default()),
 		pallet_elections_phragmen: Some(ElectionsConfig {
 			members: endowed_accounts.iter()
 						.take((num_endowed_accounts + 1) / 2)
@@ -286,13 +290,13 @@ pub fn testnet_genesis(
 						.collect(),
 		}),
 		pallet_collective_Instance1: Some(CouncilConfig::default()),
-		pallet_collective_Instance2: Some(TechnicalCommitteeConfig {
-			members: endowed_accounts.iter()
-						.take((num_endowed_accounts + 1) / 2)
-						.cloned()
-						.collect(),
-			phantom: Default::default(),
-		}),
+		// pallet_collective_Instance2: Some(TechnicalCommitteeConfig {
+		// 	members: endowed_accounts.iter()
+		// 				.take((num_endowed_accounts + 1) / 2)
+		// 				.cloned()
+		// 				.collect(),
+		// 	phantom: Default::default(),
+		// }),
 		pallet_contracts: Some(ContractsConfig {
 			current_schedule: pallet_contracts::Schedule {
 				enable_println, // this should only be enabled on development chains
@@ -314,17 +318,17 @@ pub fn testnet_genesis(
 		pallet_grandpa: Some(GrandpaConfig {
 			authorities: vec![],
 		}),
-		pallet_membership_Instance1: Some(Default::default()),
-		pallet_treasury: Some(Default::default()),
-		pallet_society: Some(SocietyConfig {
-			members: endowed_accounts.iter()
-						.take((num_endowed_accounts + 1) / 2)
-						.cloned()
-						.collect(),
-			pot: 0,
-			max_members: 999,
-		}),
-		pallet_vesting: Some(Default::default()),
+		// pallet_membership_Instance1: Some(Default::default()),
+		// pallet_treasury: Some(Default::default()),
+		// pallet_society: Some(SocietyConfig {
+		// 	members: endowed_accounts.iter()
+		// 				.take((num_endowed_accounts + 1) / 2)
+		// 				.cloned()
+		// 				.collect(),
+		// 	pot: 0,
+		// 	max_members: 999,
+		// }),
+		// pallet_vesting: Some(Default::default()),
 	}
 }
 
