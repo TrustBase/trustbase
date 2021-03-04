@@ -29,8 +29,9 @@ use frame_support::{
 		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND}, DispatchClass,
 	},
 	traits::{
-		Currency, Imbalance, KeyOwnerProofSystem, OnUnbalanced, Randomness, LockIdentifier,
+		KeyOwnerProofSystem,  Randomness, LockIdentifier,
 		U128CurrencyToVote,
+		// Imbalance, OnUnbalanced, Currency,
 	},
 };
 use frame_system::{
@@ -41,21 +42,24 @@ use frame_support::traits::InstanceFilter;
 use codec::{Encode, Decode};
 use sp_core::{
 	crypto::KeyTypeId,
-	u32_trait::{_1, _2, _3, _4, _5},
+	u32_trait::{_3, _4},
 	OpaqueMetadata,
+	// u32_trait::{_1, _2, _3, _4, _5},
 };
 pub use node_primitives::{AccountId, Signature};
 use node_primitives::{AccountIndex, Balance, BlockNumber, Hash, Index, Moment};
 use sp_api::impl_runtime_apis;
 use sp_runtime::{
-	Permill, Perbill, Perquintill, Percent, ApplyExtrinsicResult,
-	impl_opaque_keys, generic, create_runtime_str, ModuleId, FixedPointNumber,
+	Perbill, Perquintill, ApplyExtrinsicResult,
+	impl_opaque_keys, generic, create_runtime_str, FixedPointNumber,
+	// Permill, Percent, ModuleId,
 };
 use sp_runtime::curve::PiecewiseLinear;
 use sp_runtime::transaction_validity::{TransactionValidity, TransactionSource, TransactionPriority};
 use sp_runtime::traits::{
 	self, BlakeTwo256, Block as BlockT, StaticLookup, SaturatedConversion,
-	ConvertInto, OpaqueKeys, NumberFor,
+	OpaqueKeys, NumberFor,
+	// ConvertInto,
 };
 use sp_version::RuntimeVersion;
 #[cfg(any(feature = "std", test))]
@@ -81,8 +85,8 @@ pub use frame_system::Call as SystemCall;
 pub use pallet_staking::StakerStatus;
 
 /// Implementations of some helper traits passed into runtime modules as associated types.
-pub mod impls;
-use impls::Author;
+// pub mod impls;
+// use impls::Author;
 
 /// Constant values used within the runtime.
 pub mod constants;
@@ -125,7 +129,7 @@ pub fn native_version() -> NativeVersion {
 	}
 }
 
-type NegativeImbalance = <Balances as Currency<AccountId>>::NegativeImbalance;
+// type NegativeImbalance = <Balances as Currency<AccountId>>::NegativeImbalance;
 
 // pub struct DealWithFees;
 // impl OnUnbalanced<NegativeImbalance> for DealWithFees {
@@ -899,113 +903,6 @@ impl pallet_grandpa::Config for Runtime {
 // 	type WeightInfo = pallet_identity::weights::SubstrateWeight<Runtime>;
 // }
 
-// parameter_types! {
-// 	pub const ConfigDepositBase: Balance = 5 * DOLLARS;
-// 	pub const FriendDepositFactor: Balance = 50 * CENTS;
-// 	pub const MaxFriends: u16 = 9;
-// 	pub const RecoveryDeposit: Balance = 5 * DOLLARS;
-// }
-
-// impl pallet_recovery::Config for Runtime {
-// 	type Event = Event;
-// 	type Call = Call;
-// 	type Currency = Balances;
-// 	type ConfigDepositBase = ConfigDepositBase;
-// 	type FriendDepositFactor = FriendDepositFactor;
-// 	type MaxFriends = MaxFriends;
-// 	type RecoveryDeposit = RecoveryDeposit;
-// }
-
-// parameter_types! {
-// 	pub const CandidateDeposit: Balance = 10 * DOLLARS;
-// 	pub const WrongSideDeduction: Balance = 2 * DOLLARS;
-// 	pub const MaxStrikes: u32 = 10;
-// 	pub const RotationPeriod: BlockNumber = 80 * HOURS;
-// 	pub const PeriodSpend: Balance = 500 * DOLLARS;
-// 	pub const MaxLockDuration: BlockNumber = 36 * 30 * DAYS;
-// 	pub const ChallengePeriod: BlockNumber = 7 * DAYS;
-// 	pub const SocietyModuleId: ModuleId = ModuleId(*b"py/socie");
-// }
-
-// impl pallet_society::Config for Runtime {
-// 	type Event = Event;
-// 	type ModuleId = SocietyModuleId;
-// 	type Currency = Balances;
-// 	type Randomness = RandomnessCollectiveFlip;
-// 	type CandidateDeposit = CandidateDeposit;
-// 	type WrongSideDeduction = WrongSideDeduction;
-// 	type MaxStrikes = MaxStrikes;
-// 	type PeriodSpend = PeriodSpend;
-// 	type MembershipChanged = ();
-// 	type RotationPeriod = RotationPeriod;
-// 	type MaxLockDuration = MaxLockDuration;
-// 	type FounderSetOrigin = pallet_collective::EnsureProportionMoreThan<_1, _2, AccountId, CouncilCollective>;
-// 	type SuspensionJudgementOrigin = pallet_society::EnsureFounder<Runtime>;
-// 	type ChallengePeriod = ChallengePeriod;
-// }
-
-// parameter_types! {
-// 	pub const MinVestedTransfer: Balance = 100 * DOLLARS;
-// }
-
-// impl pallet_vesting::Config for Runtime {
-// 	type Event = Event;
-// 	type Currency = Balances;
-// 	type BlockNumberToBalance = ConvertInto;
-// 	type MinVestedTransfer = MinVestedTransfer;
-// 	type WeightInfo = pallet_vesting::weights::SubstrateWeight<Runtime>;
-// }
-
-// impl pallet_mmr::Config for Runtime {
-// 	const INDEXING_PREFIX: &'static [u8] = b"mmr";
-// 	type Hashing = <Runtime as frame_system::Config>::Hashing;
-// 	type Hash = <Runtime as frame_system::Config>::Hash;
-// 	type LeafData = frame_system::Module<Self>;
-// 	type OnNewRoot = ();
-// 	type WeightInfo = ();
-// }
-
-// parameter_types! {
-// 	pub const LotteryModuleId: ModuleId = ModuleId(*b"py/lotto");
-// 	pub const MaxCalls: usize = 10;
-// 	pub const MaxGenerateRandom: u32 = 10;
-// }
-
-// impl pallet_lottery::Config for Runtime {
-// 	type ModuleId = LotteryModuleId;
-// 	type Call = Call;
-// 	type Event = Event;
-// 	type Currency = Balances;
-// 	type Randomness = RandomnessCollectiveFlip;
-// 	type ManagerOrigin = EnsureRoot<AccountId>;
-// 	type MaxCalls = MaxCalls;
-// 	type ValidateCall = Lottery;
-// 	type MaxGenerateRandom = MaxGenerateRandom;
-// 	type WeightInfo = pallet_lottery::weights::SubstrateWeight<Runtime>;
-// }
-
-// parameter_types! {
-// 	pub const AssetDepositBase: Balance = 100 * DOLLARS;
-// 	pub const AssetDepositPerZombie: Balance = 1 * DOLLARS;
-// 	pub const StringLimit: u32 = 50;
-// 	pub const MetadataDepositBase: Balance = 10 * DOLLARS;
-// 	pub const MetadataDepositPerByte: Balance = 1 * DOLLARS;
-// }
-
-// impl pallet_assets::Config for Runtime {
-// 	type Event = Event;
-// 	type Balance = u64;
-// 	type AssetId = u32;
-// 	type Currency = Balances;
-// 	type ForceOrigin = EnsureRoot<AccountId>;
-// 	type AssetDepositBase = AssetDepositBase;
-// 	type AssetDepositPerZombie = AssetDepositPerZombie;
-// 	type StringLimit = StringLimit;
-// 	type MetadataDepositBase = MetadataDepositBase;
-// 	type MetadataDepositPerByte = MetadataDepositPerByte;
-// 	type WeightInfo = pallet_assets::weights::SubstrateWeight<Runtime>;
-// }
-
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
@@ -1022,13 +919,9 @@ construct_runtime!(
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Staking: pallet_staking::{Module, Call, Config<T>, Storage, Event<T>, ValidateUnsigned},
 		Session: pallet_session::{Module, Call, Storage, Event, Config<T>},
-		// Democracy: pallet_democracy::{Module, Call, Storage, Config, Event<T>},
 		Council: pallet_collective::<Instance1>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
-		// TechnicalCommittee: pallet_collective::<Instance2>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
 		Elections: pallet_elections_phragmen::{Module, Call, Storage, Event<T>, Config<T>},
-		// TechnicalMembership: pallet_membership::<Instance1>::{Module, Call, Storage, Event<T>, Config<T>},
 		Grandpa: pallet_grandpa::{Module, Call, Storage, Config, Event, ValidateUnsigned},
-		// Treasury: pallet_treasury::{Module, Call, Storage, Config, Event<T>},
 		Contracts: pallet_contracts::{Module, Call, Config<T>, Storage, Event<T>},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
 		ImOnline: pallet_im_online::{Module, Call, Storage, Event<T>, ValidateUnsigned, Config<T>},
@@ -1036,18 +929,13 @@ construct_runtime!(
 		Offences: pallet_offences::{Module, Call, Storage, Event},
 		Historical: pallet_session_historical::{Module},
 		RandomnessCollectiveFlip: pallet_randomness_collective_flip::{Module, Call, Storage},
-		// Identity: pallet_identity::{Module, Call, Storage, Event<T>},
-		// Society: pallet_society::{Module, Call, Storage, Event<T>, Config<T>},
-		// Recovery: pallet_recovery::{Module, Call, Storage, Event<T>},
-		// Vesting: pallet_vesting::{Module, Call, Storage, Event<T>, Config<T>},
 		Scheduler: pallet_scheduler::{Module, Call, Storage, Event<T>},
 		Proxy: pallet_proxy::{Module, Call, Storage, Event<T>},
 		Multisig: pallet_multisig::{Module, Call, Storage, Event<T>},
-		// Bounties: pallet_bounties::{Module, Call, Storage, Event<T>},
-		// Tips: pallet_tips::{Module, Call, Storage, Event<T>},
-		// Assets: pallet_assets::{Module, Call, Storage, Event<T>},
-		// Mmr: pallet_mmr::{Module, Storage},
-		// Lottery: pallet_lottery::{Module, Call, Storage, Event<T>},
+		// Democracy: pallet_democracy::{Module, Call, Storage, Config, Event<T>},
+		// TechnicalCommittee: pallet_collective::<Instance2>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
+		// TechnicalMembership: pallet_membership::<Instance1>::{Module, Call, Storage, Event<T>, Config<T>},
+		// Treasury: pallet_treasury::{Module, Call, Storage, Config, Event<T>},
 	}
 );
 
@@ -1083,20 +971,6 @@ pub type SignedPayload = generic::SignedPayload<Call, SignedExtra>;
 pub type CheckedExtrinsic = generic::CheckedExtrinsic<AccountId, Call, SignedExtra>;
 /// Executive: handles dispatch to the various modules.
 pub type Executive = frame_executive::Executive<Runtime, Block, frame_system::ChainContext<Runtime>, Runtime, AllModules>;
-
-/// MMR helper types.
-// mod mmr {
-// 	use super::Runtime;
-// 	pub use pallet_mmr::primitives::*;
-
-// 	pub type Leaf = <
-// 		<Runtime as pallet_mmr::Config>::LeafData
-// 		as
-// 		LeafDataProvider
-// 	>::LeafData;
-// 	pub type Hash = <Runtime as pallet_mmr::Config>::Hash;
-// 	pub type Hashing = <Runtime as pallet_mmr::Config>::Hashing;
-// }
 
 impl_runtime_apis! {
 	impl sp_api::Core<Block> for Runtime {
@@ -1291,29 +1165,6 @@ impl_runtime_apis! {
 			TransactionPayment::query_fee_details(uxt, len)
 		}
 	}
-
-	// impl pallet_mmr::primitives::MmrApi<
-	// 	Block,
-	// 	mmr::Leaf,
-	// 	mmr::Hash,
-	// > for Runtime {
-	// 	fn generate_proof(leaf_index: u64) -> Result<(mmr::Leaf, mmr::Proof<mmr::Hash>), mmr::Error> {
-	// 		Mmr::generate_proof(leaf_index)
-	// 	}
-
-	// 	fn verify_proof(leaf: mmr::Leaf, proof: mmr::Proof<mmr::Hash>) -> Result<(), mmr::Error> {
-	// 		Mmr::verify_leaf(leaf, proof)
-	// 	}
-
-	// 	fn verify_proof_stateless(
-	// 		root: mmr::Hash,
-	// 		leaf: Vec<u8>,
-	// 		proof: mmr::Proof<mmr::Hash>
-	// 	) -> Result<(), mmr::Error> {
-	// 		let node = mmr::DataOrHash::Data(mmr::OpaqueLeaf(leaf));
-	// 		pallet_mmr::verify_leaf_proof::<mmr::Hashing, _>(root, node, proof)
-	// 	}
-	// }
 
 	impl sp_session::SessionKeys<Block> for Runtime {
 		fn generate_session_keys(seed: Option<Vec<u8>>) -> Vec<u8> {
