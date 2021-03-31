@@ -879,30 +879,6 @@ impl pallet_grandpa::Config for Runtime {
 	type WeightInfo = ();
 }
 
-// parameter_types! {
-// 	pub const BasicDeposit: Balance = 10 * DOLLARS;       // 258 bytes on-chain
-// 	pub const FieldDeposit: Balance = 250 * CENTS;        // 66 bytes on-chain
-// 	pub const SubAccountDeposit: Balance = 2 * DOLLARS;   // 53 bytes on-chain
-// 	pub const MaxSubAccounts: u32 = 100;
-// 	pub const MaxAdditionalFields: u32 = 100;
-// 	pub const MaxRegistrars: u32 = 20;
-// }
-
-// impl pallet_identity::Config for Runtime {
-// 	type Event = Event;
-// 	type Currency = Balances;
-// 	type BasicDeposit = BasicDeposit;
-// 	type FieldDeposit = FieldDeposit;
-// 	type SubAccountDeposit = SubAccountDeposit;
-// 	type MaxSubAccounts = MaxSubAccounts;
-// 	type MaxAdditionalFields = MaxAdditionalFields;
-// 	type MaxRegistrars = MaxRegistrars;
-// 	type Slashed = Treasury;
-// 	type ForceOrigin = EnsureRootOrHalfCouncil;
-// 	type RegistrarOrigin = EnsureRootOrHalfCouncil;
-// 	type WeightInfo = pallet_identity::weights::SubstrateWeight<Runtime>;
-// }
-
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
@@ -932,10 +908,6 @@ construct_runtime!(
 		Scheduler: pallet_scheduler::{Module, Call, Storage, Event<T>},
 		Proxy: pallet_proxy::{Module, Call, Storage, Event<T>},
 		Multisig: pallet_multisig::{Module, Call, Storage, Event<T>},
-		// Democracy: pallet_democracy::{Module, Call, Storage, Config, Event<T>},
-		// TechnicalCommittee: pallet_collective::<Instance2>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
-		// TechnicalMembership: pallet_membership::<Instance1>::{Module, Call, Storage, Event<T>, Config<T>},
-		// Treasury: pallet_treasury::{Module, Call, Storage, Config, Event<T>},
 	}
 );
 

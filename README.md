@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-trustbase client implementation for trustbase, a Substrate compatible chain for smart contracts.
+trustbase client implementation for trustbase, a Substrate compatible chain for wasm smart contracts.
 
 ## Setup Environment
 
@@ -34,7 +34,7 @@ To run local network, do
 cargo run --release -- --chain local
 ```
 
-To run trustbase testnet, do
+To run trustbase testnet cc2, do
 
 ```
 ./target/release/trustbase --chain testnet
