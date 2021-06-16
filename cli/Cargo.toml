@@ -1,8 +1,9 @@
 [package]
 name = "node-cli"
+version = "2.0.0"
 build = "build.rs"
 edition = "2018"
-version = "0.1.0"
+
 authors = ["trust dev"]
 license = 'Apache-2.0'
 description = "Generic TrustBase node implementation in Rust."
@@ -39,7 +40,6 @@ log = "0.4.8"
 rand = "0.7.2"
 structopt = { version = "0.3.8", optional = true }
 parking_lot = "0.11.1"
-funty = "=1.1.0"
 
 # primitives
 sp-authority-discovery = { version = "3.0.0",  git = "https://github.com/paritytech/substrate" }
@@ -47,7 +47,8 @@ sp-consensus-babe = { version = "0.9.0", git = "https://github.com/paritytech/su
 grandpa-primitives = { version = "3.0.0", package = "sp-finality-grandpa", git = "https://github.com/paritytech/substrate" }
 sp-core = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 sp-runtime = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
-sp-timestamp = { version = "3.0.0", default-features = false, git = "https://github.com/paritytech/substrate" }
+sp-timestamp = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
+sp-authorship = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 sp-inherents = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 sp-keyring = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 sp-keystore = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
@@ -63,6 +64,7 @@ sc-transaction-pool = { version = "3.0.0", git = "https://github.com/paritytech/
 sc-network = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
 sc-consensus-slots = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
 sc-consensus-babe = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
+sc-consensus-uncles = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
 grandpa = { version = "0.9.0", package = "sc-finality-grandpa", git = "https://github.com/paritytech/substrate" }
 sc-client-db = { version = "0.9.0", default-features = false, git = "https://github.com/paritytech/substrate" }
 sc-offchain = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
@@ -77,7 +79,7 @@ sc-finality-grandpa-warp-sync = { version = "0.9.0", git = "https://github.com/p
 # frame dependencies
 pallet-indices = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 pallet-timestamp = { version = "3.0.0", default-features = false, git = "https://github.com/paritytech/substrate" }
-pallet-contracts = { version = "2.0.0", git = "https://github.com/paritytech/substrate" }
+pallet-contracts = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 frame-system = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 pallet-balances = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 pallet-transaction-payment = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
@@ -85,26 +87,28 @@ frame-support = { version = "3.0.0", default-features = false, git = "https://gi
 pallet-im-online = { version = "3.0.0", default-features = false, git = "https://github.com/paritytech/substrate" }
 pallet-authority-discovery = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 pallet-staking = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
-pallet-grandpa = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
+pallet-grandpa = { version = "3.1.0", git = "https://github.com/paritytech/substrate" }
 
 # node-specific dependencies
-node-runtime = { path = "../runtime" }
-node-rpc = { path = "../rpc" }
-node-primitives = { path = "../primitives" }
-node-executor = { path = "../executor" }
+node-runtime = { version = "2.0.0", path = "../runtime" }
+node-rpc = { version = "2.0.0", path = "../rpc" }
+node-primitives = { version = "2.0.0", path = "../primitives" }
+node-executor = { version = "2.0.0", path = "../executor" }
 
 # CLI-specific dependencies
 sc-cli = { version = "0.9.0", optional = true, git = "https://github.com/paritytech/substrate" }
 frame-benchmarking-cli = { version = "3.0.0", optional = true, git = "https://github.com/paritytech/substrate" }
-node-inspect = { optional = true, path = "../inspect" }
+node-inspect = { version = "0.8.0", optional = true, path = "../inspect" }
+try-runtime-cli = { version = "0.9.0", optional = true, path = "../../../utils/frame/try-runtime/cli" }
 
 # WASM-specific dependencies
-wasm-bindgen = { version = "0.2.57", optional = true }
+wasm-bindgen = { version = "0.2.73", optional = true }
 wasm-bindgen-futures = { version = "0.4.18", optional = true }
 browser-utils = { package = "substrate-browser-utils", git = "https://github.com/paritytech/substrate", optional = true, version = "0.9.0"}
+libp2p-wasm-ext = { version = "0.28", features = ["websocket"], optional = true }
 
 [target.'cfg(target_arch="x86_64")'.dependencies]
-node-executor = { path = "../executor", features = [ "wasmtime" ] }
+node-executor = { version = "2.0.0", path = "../executor", features = [ "wasmtime" ] }
 sc-cli = { version = "0.9.0", optional = true, git = "https://github.com/paritytech/substrate", features = [ "wasmtime" ] }
 sc-service = { version = "0.9.0", default-features = false, git = "https://github.com/paritytech/substrate", features = [ "wasmtime" ] }
 sp-trie = { version = "3.0.0", default-features = false, git = "https://github.com/paritytech/substrate", features = ["memory-tracker"] }
@@ -127,10 +131,11 @@ soketto = "0.4.2"
 
 [build-dependencies]
 structopt = { version = "0.3.8", optional = true }
-node-inspect = { optional = true, path = "../inspect" }
+node-inspect = { version = "0.8.0", optional = true, path = "../inspect" }
 frame-benchmarking-cli = { version = "3.0.0", optional = true, git = "https://github.com/paritytech/substrate" }
 substrate-build-script-utils = { version = "3.0.0", optional = true, git = "https://github.com/paritytech/substrate" }
 substrate-frame-cli = { version = "3.0.0", optional = true, git = "https://github.com/paritytech/substrate" }
+try-runtime-cli = { version = "0.9.0", optional = true, path = "../../../utils/frame/try-runtime/cli" }
 
 [build-dependencies.sc-cli]
 version = "0.9.0"
@@ -144,6 +149,7 @@ browser = [
 	"browser-utils",
 	"wasm-bindgen",
 	"wasm-bindgen-futures",
+	"libp2p-wasm-ext",
 ]
 cli = [
 	"node-executor/wasmi-errno",
@@ -155,8 +161,15 @@ cli = [
 	"sc-finality-grandpa-warp-sync",
 	"structopt",
 	"substrate-build-script-utils",
+	"try-runtime-cli",
 ]
 runtime-benchmarks = [
 	"node-runtime/runtime-benchmarks",
 	"frame-benchmarking-cli",
+]
+# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
+# in the near future.
+try-runtime = [
+	"node-runtime/try-runtime",
+	"try-runtime-cli",
 ]
