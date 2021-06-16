@@ -1,9 +1,10 @@
 [package]
 name = "node-executor"
-edition = "2018"
-version = "0.1.0"
+version = "2.0.0"
 authors = ["trust dev"]
-license = 'Apache-2.0'
+
+edition = "2018"
+license = "Apache-2.0"
 description = "TrustBase node implementation in Rust."
 
 [package.metadata.docs.rs]
@@ -11,9 +12,8 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "2.0.0" }
-funty = "=1.1.0"
-node-primitives = { path = "../primitives" }
-node-runtime = { path = "../runtime" }
+node-primitives = { version = "2.0.0", path = "../primitives" }
+node-runtime = { version = "2.0.0", path = "../runtime" }
 sc-executor = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
 sp-core = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 sp-keystore = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
@@ -21,16 +21,16 @@ sp-io = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 sp-state-machine = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
 sp-trie = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 trie-root = "0.16.0"
-frame-benchmarking = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
+frame-benchmarking = { version = "3.1.0", git = "https://github.com/paritytech/substrate" }
 
 [dev-dependencies]
 criterion = "0.3.0"
 frame-support = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 frame-system = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
-#node-testing = { version = "2.0.0", path = "../testing" }
+node-testing = { version = "2.0.0", path = "../testing" }
 pallet-balances = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
-pallet-contracts = { version = "2.0.0", git = "https://github.com/paritytech/substrate" }
-pallet-grandpa = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
+pallet-contracts = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
+pallet-grandpa = { version = "3.1.0", git = "https://github.com/paritytech/substrate" }
 pallet-im-online = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 pallet-indices = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
 pallet-session = { version = "3.0.0", git = "https://github.com/paritytech/substrate" }
@@ -43,6 +43,7 @@ sp-runtime = { version = "3.0.0", git = "https://github.com/paritytech/substrate
 sp-externalities = { version = "0.9.0", git = "https://github.com/paritytech/substrate" }
 substrate-test-client = { version = "2.0.0", git = "https://github.com/paritytech/substrate" }
 wat = "1.0"
+futures = "0.3.9"
 
 [features]
 wasmtime = [
