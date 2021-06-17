@@ -1,6 +1,6 @@
 [package]
 name = "trustbase"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["trust dev"]
 license = 'Apache-2.0'
 edition = "2018"
@@ -17,10 +17,11 @@ node-cli = { package = "node-cli", path = "cli" }
 [workspace]
 members = [
     'cli',
-    "primitives",
+    'primitives',
     'executor',
     'inspect',
     'runtime',
+    'testing',
 ]
 
 [profile.release]
