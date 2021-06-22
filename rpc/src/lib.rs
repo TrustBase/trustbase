@@ -159,9 +159,6 @@ pub fn create_full<C, P, SC, B>(
 	io.extend_with(
 		ContractsApi::to_delegate(Contracts::new(client.clone()))
 	);
-	// io.extend_with(
-	// 	MmrApi::to_delegate(Mmr::new(client.clone()))
-	// );
 	io.extend_with(
 		TransactionPaymentApi::to_delegate(TransactionPayment::new(client.clone()))
 	);
